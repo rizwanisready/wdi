@@ -1,0 +1,71 @@
+<div class="border-right border-warning h-100 sidebar-content">
+  <nav class="nav flex-column">
+    <!-- <li><a class="nav-link" aria-current="page" href="/">Home</a></li> -->
+    {% if request.user.is_authenticated %}
+    <li><a class="nav-link" href="{% url 'employee-dashboard' %}">Dashboard</a></li>
+
+
+    <div class="item">
+      <a class="sub-btn">Manage User<i class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="{% url 'employee-profile' %}" class="sub-item">View Profile</a>
+        <a href="{% url 'my_attendance_record' %}" class="sub-item">View Attendance</a>
+        <a href="{% url 'view-task' %}" class="sub-item">View Task</a>
+        <a href="{% url 'passwordchange' %}" class="sub-item">Update Password</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <a class="sub-btn">IPS<i class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="{% url 'add-ips' %}" class="sub-item">Add Today's Tasks</a>
+        <a href="{% url 'view-ips' %}" class="sub-item">View Previous Tasks</a>
+      </div>
+    </div>
+    {% comment %} <li><a class="nav-link" href="/logout/">Logout</a></li> {% endcomment %}
+    {% else %}
+    <li><a class="nav-link active" href="/login/">Login</a></li>
+    {% endif %}
+
+    {% if request.user.hr == True %}
+    <div class="item">
+      <a class="sub-btn">Employee<i class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="{% url 'add-employee' %}" class="sub-item">Add Employee</a>
+        <a href="{% url 'view-employee' %}" class="sub-item">View Employee</a>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if request.user.acc == True %}
+    <div class="item">
+      <a class="sub-btn">Client<i class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="#" class="sub-item">Add Client</a>
+        <a href="#" class="sub-item">View Client</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <a class="sub-btn">Project<i class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="{% url 'add-project' %}" class="sub-item">Add Project</a>
+        <a href="{% url 'view-project' %}" class="sub-item">View Project</a>
+        <a href="{% url 'add-resource' %}" class="sub-item">Assign Resource</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <a class="sub-btn">Task<i class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="{% url 'add-task' %}" class="sub-item">Add Task</a>
+        <a href="{% url 'view-task' %}" class="sub-item">View Task</a>
+      </div>
+    </div>
+    <li><a class="nav-link" href="{% url 'report-view' %}">Report</a></li>
+    <li><a class="nav-link" href="{% url 'task-hours-view' %}">Emp wise Report</a></li>
+    <li><a class="nav-link" href="{% url 'attendance_record' %}">View All Attendance</a></li>
+    
+    {% endif %}
+  </nav>
+</div>

@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block msg %}
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissable fade show" {% endif %}> <strong>{{message}}</strong><button type="button" class="close" data-dismiss="alert" area-label="Close"><span area-hidden="True">&times;</span></button></div>
+    {% endfor %}
+    {% endif %}
+{% endblock msg %}
+{% block content %} 
+<br>
+{% if request.user.hr == True %}
+<div class="view-table">
+    <table class="table">
+        <thead class="thead-darks">
+          <tr>
+
+            <th scope="col">Project ID</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Client Name</th>
+            <th scope="col">Min Hours</th>
+            <th scope="col">Max Hours</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Project Val</th>
+            <th scope="col">Project Type</th>
+            <th scope="col">Sales Rep</th>
+            <th scope="col">Project Manager</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for el in pro_list %}
+          <tr>
+
+            <td class="text">{{ el.id }}</td>
+            <td class="text"><a style="color:inherit;" href="{% url 'edit-project' el.id %}">{{ el.project_name }}</a></td>
+            <td class="text">{{ el.company_name }}</td>
+            <td class="text">{{ el.client_name }}</td>
+            <td class="text">{{ el.display_duration }}</td>
+            <td class="text">{{ el.display_duration_max }}</td>
+            <td class="text">{{ el.currency }}</td>
+            <td class="text">{{ el.project_value }}</td>
+            <td class="text">{{ el.project_type }}</td>
+            <td class="text">{{ el.sales_rep }}</td>
+            <td class="text">{{ el.project_manager }}</td>
+            <td class="text">{{ el.get_status_display }}</td>
+            <td class="text">
+              <form action="{% url 'delete-project' el.id %}" method="post" class="d-inline"> 
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                
+              </form>
+            </td>
+      
+   
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endif %}
+    {% endblock content %}
